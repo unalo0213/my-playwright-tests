@@ -16,10 +16,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'npm' # 👈 加入這行，它會自動緩存 node_modules
-          cache-dependency-path: ./playwright/package-lock.json # 指向你的 lock 檔
 
+      # 1. 獨立處理 npm 快取，並給它一個 id: npm-cache
+      - name: Cache node modules
+        id: npm-cache
+        uses: actions/cache@v4
+        with:
+          path: playwright/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('playwright/package-lock.json') }}
+
+      # 2. 如果快取命中 (cache-hit == 'true')，就跳過這整步
       - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
         working-directory: ./playwright
 
