@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { getHeader_memberId } from "@tests/base/getHeader_memberId.js";
-import { getOppositePhone } from "@tests/base/getOtherPhone.js";
+import { getHeader_memberId } from "../base/getHeader_memberId.js";
+import { getOtherPhone } from "../base/getOtherPhone.js";
 import { getConfig } from "./cms.config.js";
 const config = getConfig();
 const banUrl = `${process.env.INTERNAL_AUDIT}/v1/users/blacklist`;
@@ -19,7 +19,7 @@ test.describe('CMS_黑名單Case', () => {
 
     console.log("Step1：開始執行acctId拉黑");
     const banHeaders = getHeader_memberId(systemCMS);
-    const targetPhone = getOppositePhone(currentPhone);
+    const targetPhone = getOtherPhone(currentPhone);
     const banData = {
       "acctId": config.acctId,
       "systemKind": systemCMS,

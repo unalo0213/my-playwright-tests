@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { getHeader_memberId } from "@tests/base/getHeader_memberId.js";
+import { getHeader_memberId } from "../base/getHeader_memberId";
 import { getHeader_acctId } from "@tests/base/getHeader_acctId.js";
-import { getToken } from "@tests/base/getToken.js";
+import { getToken } from "../base/getToken";
 import { getConfig } from "./cms.config.js";
 const config = getConfig();
 

@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
-import { getToken } from "@tests/base/getToken.js";
-import { getHeader_memberId } from "@tests/base/getHeader_memberId.js";
-import { getOtherPhone } from "@tests/base/getOtherPhone.js";
+import { getToken } from "../base/getToken.js";
+import { getHeader_memberId } from "../base/getHeader_memberId.js";
+import { getOtherPhone } from "../base/getOtherPhone.js";
 import { getConfig } from "./cms.config.js";
-import { getPhone } from "@tests/base/getPhone.js";
+import { getPhone } from "../base/getPhone.js";
 const config = getConfig();
 const systemKind = 'CASHIER';
 

@@ -1,9 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { chromium } from "playwright";
 import { login } from "../base/login.js";
 import { ssoBind } from "../base/ssoBind.js";
-import { getToken } from "@tests/base/getToken.js";
-import { getHeader_memberId } from "@tests/base/getHeader_memberId.js";
+import { getToken } from "../base/getToken.js";
+import { getHeader_memberId } from "../base/getHeader_memberId.js";
 import { getConfig } from "./cms.config.js";
 const config = getConfig();
 
