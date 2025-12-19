@@ -20,10 +20,23 @@ jobs:
           cache-dependency-path: ./playwright/package-lock.json # 指向你的 lock 檔
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         working-directory: ./playwright
 
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(npm list @playwright/test --depth=0 | grep @playwright/test | sed 's/.*@//')" >> $GITHUB_OUTPUT
+        working-directory: ./playwright
+
+      - name: Cache Playwright Browsers
+        id: cache-playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ steps.playwright-version.outputs.version }}
+
       - name: Install Playwright Browsers
+        if: steps.cache-playwright.outputs.cache-hit != 'true' # 如果快取存在就跳過
         run: npx playwright install --with-deps
         working-directory: ./playwright
 
