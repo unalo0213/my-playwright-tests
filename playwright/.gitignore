@@ -1,0 +1,42 @@
+.vscode
+.DS_Store
+__pycache__
+.pytest_cache
+
+# 依賴檔案
+node_modules/
+package-lock.json
+test-results/
+blob-report/
+
+# 測試結果
+appium/common/driver.js
+appium/tests/gs/gs.config.js
+appium/tests/ops/ops.config.js
+playwright/env_example/
+playwright/helpers/
+playwright/test-results/
+playwright/playwright-report/
+playwright/playwright/.cache/
+playwright/.local-browsers/
+
+# 環境變數
+playwright/.env
+playwright/.env.int
+playwright/.env.beta
+playwright/.env.prod
+
+# 日誌檔案
+playwright/*.log
+
+# 作業系統生成檔案
+.DS_Store
+Thumbs.db
+
+# IDE 設定檔案
+.vscode/
+.idea/
+
+# 備份檔案
+*.bak
+*.tmp

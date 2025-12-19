@@ -1,0 +1,33 @@
+{
+  "name": "auto_tests",
+  "version": "1.0.0",
+  "description": "自動化測試-Playwright",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "setup": "playwright install && node helpers/setup.js",
+    "test": "cross-env ENV_NAME=beta playwright test --ui --no-run",
+    "headed": "cross-env ENV_NAME=beta playwright test --headed",
+    "debug": "cross-env ENV_NAME=beta playwright test --debug",
+    "ui": "cross-env ENV_NAME=beta playwright test --ui",
+    "trace": "playwright show-trace trace.zip",
+    "report": "playwright show-report --port 9100",
+    "gen": "npx playwright codegen",
+    "type-check": "tsc --noEmit"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/mcp": "^0.0.52",
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.7.0",
+    "allure-playwright": "^2.15.1",
+    "cross-env": "7.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.6.0"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.18",
+    "dotenv": "^17.2.3"
+  }
+}
