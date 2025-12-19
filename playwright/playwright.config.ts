@@ -62,9 +62,9 @@ export default defineConfig({
     baseURL: "https://www.beta.car-plus.cool",
     storageState: "auth.json",
     headless: false,
-    trace: "on-first-retry",
+    trace: "retain-on-failure",
     screenshot: "only-on-failure",
-    video: "off",
+    video: "retain-on-failure",
     actionTimeout: process.env.TIMEOUT ? parseInt(process.env.TIMEOUT) : 10000,
     navigationTimeout: process.env.TIMEOUT
       ? parseInt(process.env.TIMEOUT)
