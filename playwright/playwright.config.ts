@@ -51,20 +51,19 @@ export default defineConfig({
   /* 在 CI 上選擇工作數，本地開發時使用undefined */
   // workers: process.env.CI ? 1 : undefined,
   /* 報告器設定 */
-  reporter: [["html"], ["line"]],
-  /* 全域共享設定 */
-  timeout: process.env.TIMEOUT ? parseInt(process.env.TIMEOUT) : 60000,
-  expect: {
-    timeout: process.env.TIMEOUT ? parseInt(process.env.TIMEOUT) : 10000,
-  },
+  reporter: [
+    ['list'], // 終端機看到進度
+    ['html', { open: 'never' }], // 產出 HTML 報告
+  ],
+
   globalSetup: path.resolve(__dirname, "tests/base/webLoginToken.ts"),
   /* 並行執行所有測試文件 */
   use: {
     baseURL: "https://www.beta.car-plus.cool",
     storageState: "auth.json",
     headless: false,
-    trace: "off",
-    screenshot: "off",
+    trace: "on-first-retry",
+    screenshot: "only-on-failure",
     video: "off",
     actionTimeout: process.env.TIMEOUT ? parseInt(process.env.TIMEOUT) : 10000,
     navigationTimeout: process.env.TIMEOUT
@@ -90,11 +89,4 @@ export default defineConfig({
       },
     },
   ],
-
-  /* 在開始測試前啟動開發伺服器 */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });
