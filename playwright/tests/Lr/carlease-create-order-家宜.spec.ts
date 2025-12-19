@@ -1,7 +1,7 @@
 import test, { Page } from "@playwright/test";
 import dayjs from "dayjs";
 import { getConfig } from "./carlease-create-order.config";
-import { loginAdmin } from "@helpers/loginAdmin";
+import { loginAdmin } from "../base/loginAdmin.js";
 const config = getConfig();
 
 
@@ -173,7 +173,7 @@ test.describe("長租測試", () => {
       .locator("text=查無資料")
       .or(page.locator("text=沒有資料"));
     const creditCell = page.getByRole("cell", { name: creditNo });
-  
+
 
     try {
       await Promise.race([
