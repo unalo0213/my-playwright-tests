@@ -10,13 +10,16 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/pw-browsers
+
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-
+         
       # 1. 獨立處理 npm 快取，並給它一個 id: npm-cache
       - name: Cache node modules
         id: npm-cache
@@ -40,8 +43,13 @@ jobs:
         id: cache-playwright
         uses: actions/cache@v4
         with:
-          path: ~/.cache/ms-playwright
-          key: playwright-browsers-${{ steps.playwright-version.outputs.version }}
+          path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
+
+      # 拆分：系統依賴一定要裝，但瀏覽器只有在 cache-hit != 'true' 才裝
+      - name: Install Playwright System Dependencies
+        run: npx playwright install-deps
+        working-directory: ./playwright    
 
       - name: Install Playwright Browsers
         if: steps.cache-playwright.outputs.cache-hit != 'true' # 如果快取存在就跳過
