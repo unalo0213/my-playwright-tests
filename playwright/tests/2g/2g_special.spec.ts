@@ -1,11 +1,11 @@
-import { test, expect, Page } from "@playwright/test";
+import { test, Page } from "@playwright/test";
 import { loginAdmin } from "../base/loginAdmin.js";
 import { getConfig } from "./2g.config.js";
 const config = getConfig();
 
 test('2G-特殊還車', async ({ page }) => {
     // 登入
-    await page.goto(`${process.env.ADMIN_2G_URL}order`)
+    await page.goto(`${process.env.ADMIN_2G_URL}/order`)
     await loginAdmin(page);
 
     //訂單查詢

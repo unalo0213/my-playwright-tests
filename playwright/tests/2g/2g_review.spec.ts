@@ -7,6 +7,7 @@ const config = getConfig();
 
 test.describe("2G_送審Case", () => {
   test("送審→通過", async ({ request }) => {
+    //⭐
     console.log("\nStep1:取得當前審核狀態");
     const token = await getToken(request);
     const headers = getHeader_memberId(token);
@@ -24,6 +25,7 @@ test.describe("2G_送審Case", () => {
       throw new Error(`❌Fail: ${banBody.message}`);
     }
 
+    //⭐
     console.log("\nStep2:送出帳號審核通過");
     const passUrl = `${process.env.INTERNAL_ADMIN_AUDIT}/v2/users/documents/review`;
     const passData = {
@@ -52,6 +54,7 @@ test.describe("2G_送審Case", () => {
       throw new Error(`❌Fail: ${passBody.message}`);
     }
 
+    //⭐
     console.log("\nStep3:查詢審核結果");
     const chkUrl = `${process.env.INTERNAL_ADMIN_AUDIT}/v2/users/documents/list`;
     const chkData = {
@@ -76,21 +79,19 @@ test.describe("2G_送審Case", () => {
       throw new Error(`❌Fail: ${chkBody.message}`);
     }
 
+    //⭐
     console.log("\nStep4:還原帳號審核狀態");
     await runDbQuery(config.dbName, async (connection) => {
-      // 1. 執行更新
       const [result] = await connection.execute(
         "UPDATE certified_document SET verifyStatus = ? WHERE acctid = ?",
         [2, config.acctId]
       );
 
-      // 2. 執行查詢，確認最新狀態
       const [rows] = await connection.execute(
         "SELECT verifyStatus FROM certified_document WHERE acctid = ?",
         [config.acctId]
       );
 
-      // 3. 印出結果
       console.log(
         `\n✅acctId：${config.acctId} | verifyStatus: ${rows[0].verifyStatus}`
       );
