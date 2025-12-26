@@ -33,6 +33,7 @@ export async function runDbQuery(
   try {
     // 尋找並強行殺掉佔用此 Port 的所有進程
     execSync(`lsof -t -i:${localPort} | xargs kill -9`, { stdio: "ignore" });
+    await new Promise((r) => setTimeout(r, 500));
     //console.log(`🧹 已清理 Port ${localPort} 的舊連線進程`);
   } catch (e) {
     // 沒人佔用時會報錯，忽略即可
@@ -49,16 +50,15 @@ export async function runDbQuery(
     "-o",
     "StrictHostKeyChecking=no",
     "-o",
-    "ExitOnForwardFailure=yes",
+    "ExitOnForwardFailure=yes", // 這裡很有用，但要確保它真的會結束進程
     "-o",
     "ConnectTimeout=10",
   ]);
 
   // 監聽 SSH 錯誤 Log
-  sshProcess.stderr.on("data", (data) => {
-    const msg = data.toString();
-    if (!msg.includes("Permanently added")) {
-      console.error(`[SSH Debug]: ${msg}`);
+  sshProcess.on("exit", (code) => {
+    if (code !== 0 && code !== null) {
+      console.error(`[SSH Exit]: 隧道非預期中斷，代碼: ${code}`);
     }
   });
 

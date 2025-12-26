@@ -3,7 +3,7 @@ interface car2goConfig {
   phone: string;
   acctId: string;
   acctName: string;
-  dbName: string;
+  dbName_auth: string;
 }
 
 export const getConfig = (): car2goConfig => {
@@ -13,14 +13,14 @@ export const getConfig = (): car2goConfig => {
         phone: "0917132085",
         acctId: "F",
         acctName: "F",
-        dbName: "F",
+        dbName_auth: "F",
       };
     case "beta":
       return {
         phone: "0903005344",
         acctId: "2402110",
         acctName: "344",
-        dbName: "beta-auth",
+        dbName_auth: "beta-auth",
       };
     default:
       throw new Error(`Unknown ENV_NAME: ${process.env.ENV_NAME}`);

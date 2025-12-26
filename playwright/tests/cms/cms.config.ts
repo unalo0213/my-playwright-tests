@@ -25,12 +25,8 @@ interface CmsConfig {
   unBanMemo: string;
   /** 員編memberId */
   memberId: string;
-  /** mail信箱*/
-  mail_account: string;
-  /** mail信箱密碼*/
-  mail_password: string;
-  /** `beta-auth`.black_list */
-  dbName: string;
+  /** `beta-auth`*/
+  dbName_auth: string;
   /** 人黑拉黑acctId */
   faceBlack_acctId: string;
   /** 人黑拉黑loginId */
@@ -54,9 +50,7 @@ export const getConfig = (): CmsConfig => {
         banMemo: "系統測試-拉黑",
         unBanMemo: "系統測試-解黑",
         memberId: "F",
-        mail_account: "F",
-        mail_password: "F",
-        dbName: "F",
+        dbName_auth: "F",
         faceBlack_acctId: "F",
         faceBlack_loginId: "F",
       };
@@ -75,9 +69,7 @@ export const getConfig = (): CmsConfig => {
         banMemo: "系統測試-拉黑",
         unBanMemo: "系統測試-解黑",
         memberId: "K2108",
-        mail_account: "e0903005344@gmail.com",
-        mail_password: "Carplus122088",
-        dbName: "beta-auth",
+        dbName_auth: "beta-auth",
         faceBlack_acctId: "359619",
         faceBlack_loginId: "C220509349",
       };
