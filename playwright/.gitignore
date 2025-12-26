@@ -5,9 +5,9 @@ __pycache__
 
 # 依賴檔案
 node_modules/
-package-lock.json
 test-results/
 blob-report/
+package-lock.json
 
 # 測試結果
 appium/common/driver.js

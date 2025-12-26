@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import { getConfig } from "./cms.config.js";
+import { getConfig } from "./cms.config";
 const config = getConfig();
 
 test("SR_忘記+修改密碼", async ({ page }) => {

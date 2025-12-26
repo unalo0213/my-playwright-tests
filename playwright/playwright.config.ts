@@ -18,12 +18,10 @@ const envFileMap: EnvFileMap = {
 };
 
 const envName: string = process.env.ENV_NAME || "beta"; // default
-
-console.log(`ENV_NAME`, process.env.ENV_NAME);
+console.log(`✅ENV_NAME`, process.env.ENV_NAME);
 dotenv.config({
   path: path.resolve(__dirname, envFileMap[envName]),
 });
-
 /** 如果找不到 .env 檔案則提示使用者 */
 if (!process.env.ACCOUNT || !process.env.PASSWORD) {
   console.error("----- 請確認已經執行過 yarn setup 並且設定好 .env ------");
@@ -42,18 +40,12 @@ if (
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
+  timeout: 40000,
   testDir: "./tests",
   fullyParallel: true,
-  /* 在 CI 上使用時，如果沒有測試失敗則不進行重試 */
-  // forbidOnly: !!process.env.CI,
-  /* 在 CI 上重試失敗的測試 */
-  // retries: process.env.CI ? 2 : 0,
-  /* 在 CI 上選擇工作數，本地開發時使用undefined */
-  // workers: process.env.CI ? 1 : undefined,
-  /* 報告器設定 */
   reporter: [
-    ['list'], // 終端機看到進度
-    ['html', { open: 'never' }], // 產出 HTML 報告
+    ["list"], // 終端機看到進度
+    ["html", { open: "never" }], // 產出 HTML 報告
   ],
 
   globalSetup: path.resolve(__dirname, "tests/base/webLoginToken.ts"),
@@ -65,11 +57,7 @@ export default defineConfig({
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
-    actionTimeout: process.env.TIMEOUT ? parseInt(process.env.TIMEOUT) : 10000,
-    navigationTimeout: process.env.TIMEOUT
-      ? parseInt(process.env.TIMEOUT)
-      : 10000,
-    permissions: ['clipboard-read', 'clipboard-write'],
+    permissions: ["clipboard-read", "clipboard-write"],
   },
 
   /* 配置多個瀏覽器項目 */
@@ -80,10 +68,11 @@ export default defineConfig({
         ...devices["Desktop Chrome"],
         viewport: { width: 1280, height: 800 },
         launchOptions: {
-          headless: false, // Google OAuth 必須 headful
+          headless: true, // 後台用這個
+          //headless: false, // Google OAuth 必須 headful
           args: [
-            '--start-maximized',
-            '--disable-blink-features=AutomationControlled',
+            "--start-maximized",
+            "--disable-blink-features=AutomationControlled",
           ],
         },
       },

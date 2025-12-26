@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { getHeader_memberId } from "../base/getHeader_memberId";
 import { getToken } from "../base/getToken";
 import { getConfig } from "./2g.config";
-import { runDbQuery } from "../base/runDbQuery.js";
+import { runDbQuery } from "../base/runDbQuery";
 const config = getConfig();
 
 const testCases = [

@@ -5,7 +5,7 @@ export function getHeader_toC(systemKind: string) {
     return {
         'accept': 'application/json',
         'Content-Type': 'application/json',
-        'X-System-Kind': systemKind,
+        'X-System-Kind': 'GOSMART',
         'X-Platform': 'WEB'
     };
 }

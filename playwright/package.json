@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "dayjs": "^1.11.18",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "mysql2": "^3.16.0",
+    "tunnel-ssh": "^5.2.0"
   }
 }

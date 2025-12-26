@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 import { ssoBind } from "../base/ssoBind";
 import { getToken } from "../base/getToken";
 import { getHeader_memberId } from "../base/getHeader_memberId";
-import { runDbQuery } from "../base/runDbQuery.js";
+import { runDbQuery } from "../base/runDbQuery";
 import { getConfig } from "./web.config";
 const config = getConfig();
 
