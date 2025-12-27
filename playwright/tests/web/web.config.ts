@@ -20,7 +20,8 @@ interface CmsConfig {
 }
 
 export const getConfig = (): CmsConfig => {
-  switch (process.env.ENV_NAME) {
+  const envName = process.env.ENV_NAME || "beta"; // 添加這行
+  switch (envName) {
     case "prod":
       return {
         acctId: "F",
