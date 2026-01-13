@@ -20,8 +20,7 @@ interface CmsConfig {
 }
 
 export const getConfig = (): CmsConfig => {
-  const envName = process.env.ENV_NAME || "beta"; // 添加這行
-  switch (envName) {
+  switch (process.env.ENV_NAME) {
     case "prod":
       return {
         acctId: "F",
@@ -43,7 +42,7 @@ export const getConfig = (): CmsConfig => {
         mail_pwd: "Carplus122088",
         dbName_auth: "beta-auth",
         departStation: "台北土城站",
-        smsPin: "123456",
+        smsPin: "1234567",
         note: "系統測試訂單，請勿理會",
       };
     default:
