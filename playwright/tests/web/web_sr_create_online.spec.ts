@@ -5,7 +5,7 @@ const config = getConfig();
 import dayjs from "dayjs";
 
 
-test.only("SR建立訂單(官網)", async ({ page }: { page: Page }) => {
+test("SR建立訂單(官網)", async ({ page }: { page: Page }) => {
   if (process.env.ENV_NAME === "prod") {
     await page.goto(process.env.BASE_URL);
 
